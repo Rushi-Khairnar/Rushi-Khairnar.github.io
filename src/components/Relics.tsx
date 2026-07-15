@@ -4,12 +4,12 @@ import { RELICS } from '../data';
 
 export default function Relics() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+    <section id="relics" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-6xl mx-auto">
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
+           viewport={{ once: false, amount: 0.2, margin: "-100px" }}
            transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-3 mb-12 justify-center">
@@ -23,7 +23,7 @@ export default function Relics() {
                 key={idx}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: idx * 0.15, type: 'spring', bounce: 0.4 }}
                 whileHover={{ y: -10, rotateY: 10, rotateX: 5 }}
                 className="group relative h-64 perspective-1000"
@@ -33,7 +33,7 @@ export default function Relics() {
                     href={relic.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="block w-full h-full relative transform-style-3d transition-transform duration-500 rounded-xl bg-gradient-to-br from-gaming-purple/20 to-gaming-cyan/10 border border-gaming-purple/50 p-6 flex flex-col items-center justify-center text-center overflow-hidden shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] hover:border-gaming-cyan hover:from-gaming-cyan/20 hover:to-gaming-purple/10 cursor-pointer"
+                    className="block w-full h-full relative transform-style-3d transition-transform duration-500 rounded-xl bg-gradient-to-br from-gaming-purple/20 to-gaming-cyan/10 border border-gaming-purple/50 p-6 flex flex-col items-center justify-center text-center overflow-hidden shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] hover:border-gaming-cyan hover:from-gaming-cyan/20 hover:to-gaming-purple/10 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] cursor-pointer"
                   >
                     <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-30"></div>
                     

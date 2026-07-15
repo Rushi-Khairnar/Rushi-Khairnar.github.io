@@ -23,23 +23,43 @@ export const ACADEMIC_EVOLUTION = [
 export const SKILL_ARSENAL = [
   {
     category: "Programming",
-    skills: ["Python", "R"],
+    skills: [
+      { name: "Python", proficiency: 90 },
+      { name: "R", proficiency: 75 }
+    ],
   },
   {
     category: "Machine Learning",
-    skills: ["Supervised & Unsupervised Learning", "Model Building"],
+    skills: [
+      { name: "Supervised & Unsupervised Learning", proficiency: 85 },
+      { name: "Model Building", proficiency: 80 }
+    ],
   },
   {
     category: "Data Visualization",
-    skills: ["Power BI", "Excel", "Streamlit"],
+    skills: [
+      { name: "Power BI", proficiency: 95 },
+      { name: "Excel", proficiency: 90 },
+      { name: "Streamlit", proficiency: 85 }
+    ],
   },
   {
     category: "AI & Prompt Eng.",
-    skills: ["Prompt Engineering", "ChatGPT", "Gemini", "Claude"],
+    skills: [
+      { name: "Prompt Engineering", proficiency: 90 },
+      { name: "ChatGPT", proficiency: 95 },
+      { name: "Gemini", proficiency: 85 },
+      { name: "Claude", proficiency: 80 }
+    ],
   },
   {
     category: "Tools & Platforms",
-    skills: ["Google Colab", "VS Code", "Jupyter Notebook", "GitHub"],
+    skills: [
+      { name: "Google Colab", proficiency: 90 },
+      { name: "VS Code", proficiency: 85 },
+      { name: "Jupyter Notebook", proficiency: 95 },
+      { name: "GitHub", proficiency: 80 }
+    ],
   },
 ];
 
@@ -81,6 +101,7 @@ export const RAID_HISTORY = [
       "Completed hands-on exercises in machine learning fundamentals and cloud platforms."
     ],
     rewards: ["AI Fundamentals", "Machine Learning", "Cloud Concepts"],
+    techStack: ["AI", "Cloud", "Machine Learning"],
   },
   {
     title: "Power BI for Business Applications",
@@ -91,6 +112,7 @@ export const RAID_HISTORY = [
       "Created dashboards, data models, and automated reports as part of the program."
     ],
     rewards: ["Power BI", "Data Modeling", "Business Reporting"],
+    techStack: ["Power BI", "Data Modeling"],
   },
 ];
 

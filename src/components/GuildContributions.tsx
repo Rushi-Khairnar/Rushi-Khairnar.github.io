@@ -4,12 +4,12 @@ import { GUILD_CONTRIBUTIONS } from '../data';
 
 export default function GuildContributions() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 relative bg-[#0f172a]/30">
+    <section id="guild" className="py-20 px-4 sm:px-6 lg:px-8 relative bg-[#0f172a]/30">
       <div className="max-w-5xl mx-auto">
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
+           viewport={{ once: false, amount: 0.2, margin: "-100px" }}
            transition={{ duration: 0.6 }}
         >
            <div className="flex items-center gap-3 mb-12">
@@ -24,7 +24,7 @@ export default function GuildContributions() {
                 key={idx}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
                 className="bg-gaming-card border border-gaming-purple/20 rounded-xl p-6 relative overflow-hidden group hover:border-gaming-purple hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] transition-all"
               >
@@ -35,7 +35,7 @@ export default function GuildContributions() {
 
                 <h3 className="text-xl font-heading font-bold text-gaming-text mt-4 mb-2 pr-20">
                   {contrib.link ? (
-                    <a href={contrib.link} target="_blank" rel="noopener noreferrer" className="hover:text-gaming-cyan transition-colors">
+                    <a href={contrib.link} target="_blank" rel="noopener noreferrer" className="hover:text-gaming-cyan transition-colors hover:drop-shadow-[0_0_8px_currentColor]">
                       {contrib.event} ↗
                     </a>
                   ) : (

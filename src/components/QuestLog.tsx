@@ -9,7 +9,7 @@ export default function QuestLog() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-3 mb-12">
@@ -24,7 +24,7 @@ export default function QuestLog() {
                 key={quest.id}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
                 className="bg-gaming-card border-l-4 border-l-gaming-cyan border-y border-r border-gaming-purple/30 rounded-r-xl p-6 sm:p-8 relative overflow-hidden group hover:shadow-[0_0_25px_rgba(34,211,238,0.15)] transition-all"
               >
@@ -69,7 +69,7 @@ export default function QuestLog() {
                       href={quest.repository} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-gaming-card border border-gaming-muted/50 hover:border-gaming-cyan rounded-md text-gaming-text hover:text-gaming-cyan transition-all"
+                      className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-gaming-card border border-gaming-muted/50 hover:border-gaming-cyan rounded-md text-gaming-text hover:text-gaming-cyan transition-all hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]"
                     >
                       <Github size={18} />
                       <span className="font-heading text-sm">View Source</span>

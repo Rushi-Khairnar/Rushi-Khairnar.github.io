@@ -4,12 +4,12 @@ import { ACADEMIC_EVOLUTION } from '../data';
 
 export default function RankProgression() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+    <section id="rank" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, amount: 0.2, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center justify-center gap-3 mb-12">
@@ -25,7 +25,7 @@ export default function RankProgression() {
                 <motion.div 
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: index * 0.2, type: "spring" }}
                   className="relative group"
                 >
@@ -44,7 +44,7 @@ export default function RankProgression() {
                   <motion.div 
                     initial={{ width: 0 }}
                     whileInView={{ width: "4rem" }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.2 }}
                     transition={{ delay: index * 0.2 + 0.1, duration: 0.4 }}
                     className="hidden md:block h-1 bg-gradient-to-r from-gaming-purple/40 to-gaming-cyan/40 mx-2"
                   ></motion.div>
@@ -55,7 +55,7 @@ export default function RankProgression() {
                   <motion.div 
                     initial={{ height: 0 }}
                     whileInView={{ height: "2rem" }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.2 }}
                     transition={{ delay: index * 0.2 + 0.1, duration: 0.4 }}
                     className="block md:hidden w-1 bg-gradient-to-b from-gaming-purple/40 to-gaming-cyan/40 my-2"
                   ></motion.div>
@@ -68,7 +68,7 @@ export default function RankProgression() {
                <motion.div 
                   initial={{ width: 0 }}
                   whileInView={{ width: "4rem" }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: ACADEMIC_EVOLUTION.length * 0.2, duration: 0.4 }}
                   className="hidden md:block h-1 bg-gradient-to-r from-gaming-cyan/40 to-yellow-400/60 mx-2"
                 ></motion.div>
@@ -76,7 +76,7 @@ export default function RankProgression() {
                 <motion.div 
                   initial={{ height: 0 }}
                   whileInView={{ height: "2rem" }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: ACADEMIC_EVOLUTION.length * 0.2, duration: 0.4 }}
                   className="block md:hidden w-1 bg-gradient-to-b from-gaming-cyan/40 to-yellow-400/60 my-2"
                 ></motion.div>
@@ -84,7 +84,7 @@ export default function RankProgression() {
                 <motion.div
                   initial={{ scale: 0, rotate: -45 }}
                   whileInView={{ scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: ACADEMIC_EVOLUTION.length * 0.2 + 0.2, type: "spring", bounce: 0.5 }}
                   className="w-40 h-48 bg-gradient-to-br from-yellow-500/20 to-orange-600/20 rounded-xl border border-yellow-500/50 flex flex-col items-center justify-center shadow-[0_0_40px_rgba(234,179,8,0.3)] relative overflow-hidden"
                 >

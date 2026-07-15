@@ -1,4 +1,7 @@
-import { useState } from 'react';
+const fs = require('fs');
+let code = fs.readFileSync('src/components/SkillsSection.tsx', 'utf8');
+
+code = `import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import { SKILL_ARSENAL } from '../data';
@@ -108,3 +111,5 @@ export default function SkillsSection() {
     </section>
   );
 }
+`;
+fs.writeFileSync('src/components/SkillsSection.tsx', code);

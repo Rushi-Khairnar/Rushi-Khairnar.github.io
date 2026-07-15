@@ -1,10 +1,25 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Download, Mail, Swords, Hexagon } from 'lucide-react';
 import { HUNTER_INFO } from '../data';
+import DownloadModal from './DownloadModal';
 
 export default function HeroSection() {
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+
+  const handleDownloadConfirm = () => {
+    // Create an invisible link to trigger the download programmatically
+    const link = document.createElement('a');
+    link.href = '/Rushikesh_Khairnar_CV.pdf';
+    link.download = 'Rushikesh_Khairnar_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setIsDownloadModalOpen(false);
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-20">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-20">
       {/* Background portal glow */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
         <motion.div 
@@ -70,15 +85,15 @@ export default function HeroSection() {
               <div className="w-full h-px bg-gradient-to-r from-transparent via-gaming-cyan/50 to-transparent my-4"></div>
               
               <div className="flex gap-4 w-full justify-around text-sm font-mono">
-                <div className="flex flex-col items-center">
-                  <span className="text-gaming-muted text-[10px] tracking-widest mb-1">AUTHORITY</span>
-                  <span className="text-gaming-cyan drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">DATA HUNTER</span>
-                </div>
+                <a href="#profile" className="flex flex-col items-center group/link cursor-pointer transition-transform hover:scale-105">
+                  <span className="text-gaming-muted text-[10px] tracking-widest mb-1 group-hover/link:text-gaming-text transition-colors">AUTHORITY</span>
+                  <span className="text-gaming-cyan drop-shadow-[0_0_5px_rgba(34,211,238,0.8)] group-hover/link:drop-shadow-[0_0_10px_rgba(34,211,238,1)] transition-all">DATA HUNTER</span>
+                </a>
                 <div className="w-px h-8 bg-gaming-cyan/20"></div>
-                <div className="flex flex-col items-center">
-                  <span className="text-gaming-muted text-[10px] tracking-widest mb-1">THREAT LEVEL</span>
-                  <span className="text-gaming-purple font-bold drop-shadow-[0_0_8px_rgba(139,92,246,0.8)]">S-CLASS</span>
-                </div>
+                <a href="#rank" className="flex flex-col items-center group/link cursor-pointer transition-transform hover:scale-105">
+                  <span className="text-gaming-muted text-[10px] tracking-widest mb-1 group-hover/link:text-gaming-text transition-colors">THREAT LEVEL</span>
+                  <span className="text-gaming-purple font-bold drop-shadow-[0_0_8px_rgba(139,92,246,0.8)] group-hover/link:drop-shadow-[0_0_15px_rgba(139,92,246,1)] transition-all">S-CLASS</span>
+                </a>
               </div>
             </div>
           </div>
@@ -118,18 +133,26 @@ export default function HeroSection() {
           transition={{ duration: 0.5, delay: 1.2 }}
           className="flex flex-wrap justify-center gap-4 sm:gap-6"
         >
-          <a href="#quests" className="group relative px-6 py-3 font-heading font-medium text-gaming-bg bg-gaming-cyan rounded-md overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] hover:shadow-[0_0_25px_rgba(34,211,238,0.8)] transition-all duration-300 flex items-center gap-2">
+          <a href="#quests" className="group relative px-6 py-3 font-heading font-medium text-gaming-bg bg-gaming-cyan border border-transparent rounded-md overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] hover:shadow-[0_0_25px_rgba(34,211,238,0.8)] transition-all duration-300 flex items-center gap-2">
             <span className="relative z-10 flex items-center gap-2"><Swords size={20} /> My Quests</span>
-            <div className="absolute inset-0 h-full w-0 bg-white/20 transition-all duration-300 ease-out group-hover:w-full"></div>
+            <div className="absolute top-0 left-0 h-full w-0 bg-white/20 transition-all duration-300 ease-out group-hover:w-full"></div>
           </a>
-          <a href="#contact" className="group px-6 py-3 font-heading font-medium text-gaming-text border border-gaming-purple/50 bg-gaming-card rounded-md hover:border-gaming-purple hover:bg-gaming-purple/10 shadow-[0_0_10px_rgba(139,92,246,0.1)] hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-300 flex items-center gap-2">
-            <Mail size={20} /> Send Message
+          <a href="#contact" className="group relative px-6 py-3 font-heading font-medium text-gaming-bg bg-gaming-cyan border border-transparent rounded-md overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] hover:shadow-[0_0_25px_rgba(34,211,238,0.8)] transition-all duration-300 flex items-center gap-2">
+            <span className="relative z-10 flex items-center gap-2"><Mail size={20} /> Send Message</span>
+            <div className="absolute top-0 left-0 h-full w-0 bg-white/20 transition-all duration-300 ease-out group-hover:w-full"></div>
           </a>
-          <a href="/Rushikesh_Khairnar_CV.pdf" download="Rushikesh_Khairnar_CV.pdf" className="group px-6 py-3 font-heading font-medium text-gaming-text border border-gaming-muted/30 bg-gaming-card rounded-md hover:border-gaming-muted hover:bg-gaming-muted/10 transition-all duration-300 flex items-center gap-2">
-            <Download size={20} /> Download CV
-          </a>
+          <button onClick={() => setIsDownloadModalOpen(true)} className="group relative px-6 py-3 font-heading font-medium text-gaming-bg bg-gaming-cyan border border-transparent rounded-md overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] hover:shadow-[0_0_25px_rgba(34,211,238,0.8)] transition-all duration-300 flex items-center gap-2 cursor-pointer">
+            <span className="relative z-10 flex items-center gap-2"><Download size={20} /> Download CV</span>
+            <div className="absolute top-0 left-0 h-full w-0 bg-white/20 transition-all duration-300 ease-out group-hover:w-full"></div>
+          </button>
         </motion.div>
       </div>
+
+      <DownloadModal 
+        isOpen={isDownloadModalOpen} 
+        onClose={() => setIsDownloadModalOpen(false)} 
+        onConfirm={handleDownloadConfirm} 
+      />
     </section>
   );
 }

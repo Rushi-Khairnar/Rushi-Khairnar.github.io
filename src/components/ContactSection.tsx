@@ -11,7 +11,7 @@ export default function ContactSection() {
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
+           viewport={{ once: false, amount: 0.2, margin: "-100px" }}
            transition={{ duration: 0.6 }}
            className="text-center mb-16"
         >
@@ -25,13 +25,13 @@ export default function ContactSection() {
           <motion.div
              initial={{ opacity: 0, x: -30 }}
              whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
+             viewport={{ once: false, amount: 0.2 }}
              transition={{ duration: 0.6 }}
              className="space-y-6"
           >
             <h3 className="font-heading text-xl text-gaming-purple mb-6">Contact Coordinates</h3>
             
-            <a href={`mailto:${HUNTER_INFO.email}`} className="flex items-center gap-4 p-4 rounded-lg bg-gaming-card border border-gaming-purple/20 hover:border-gaming-cyan hover:bg-gaming-cyan/5 transition-all group">
+            <a href={`mailto:${HUNTER_INFO.email}`} className="flex items-center gap-4 p-4 rounded-lg bg-gaming-card border border-gaming-purple/20 hover:border-gaming-cyan hover:bg-gaming-cyan/5 transition-all group hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
               <div className="w-12 h-12 rounded-full bg-gaming-purple/10 flex items-center justify-center group-hover:bg-gaming-cyan/20 group-hover:text-gaming-cyan text-gaming-purple transition-all">
                 <Mail size={24} />
               </div>
@@ -41,7 +41,7 @@ export default function ContactSection() {
               </div>
             </a>
 
-            <a href={`tel:${HUNTER_INFO.phone}`} className="flex items-center gap-4 p-4 rounded-lg bg-gaming-card border border-gaming-purple/20 hover:border-gaming-cyan hover:bg-gaming-cyan/5 transition-all group">
+            <a href={`tel:${HUNTER_INFO.phone}`} className="flex items-center gap-4 p-4 rounded-lg bg-gaming-card border border-gaming-purple/20 hover:border-gaming-cyan hover:bg-gaming-cyan/5 transition-all group hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
               <div className="w-12 h-12 rounded-full bg-gaming-purple/10 flex items-center justify-center group-hover:bg-gaming-cyan/20 group-hover:text-gaming-cyan text-gaming-purple transition-all">
                 <Phone size={24} />
               </div>
@@ -52,11 +52,11 @@ export default function ContactSection() {
             </a>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a href={HUNTER_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 p-3 rounded-md bg-[#0a66c2]/10 border border-[#0a66c2]/30 text-[#0a66c2] hover:bg-[#0a66c2] hover:text-white transition-all">
-                <Linkedin size={20} /> LinkedIn
+              <a href={HUNTER_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 p-3 rounded-md bg-gaming-cyan/10 border border-gaming-cyan/30 text-gaming-cyan hover:bg-gaming-cyan hover:text-gaming-bg transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.8)] hover:-translate-y-1 group">
+                <Linkedin size={20} className="group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all" /> LinkedIn
               </a>
-              <a href={HUNTER_INFO.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 p-3 rounded-md bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all">
-                <Github size={20} /> GitHub
+              <a href={HUNTER_INFO.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 p-3 rounded-md bg-gaming-purple/10 border border-gaming-purple/30 text-gaming-purple hover:bg-gaming-purple hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.8)] hover:-translate-y-1 group">
+                <Github size={20} className="group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all" /> GitHub
               </a>
             </div>
           </motion.div>
@@ -65,7 +65,7 @@ export default function ContactSection() {
           <motion.div
              initial={{ opacity: 0, x: 30 }}
              whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
+             viewport={{ once: false, amount: 0.2 }}
              transition={{ duration: 0.6 }}
           >
             <form className="bg-gaming-card border border-gaming-purple/30 p-6 sm:p-8 rounded-xl shadow-[0_0_20px_rgba(15,23,42,0.8)]" onSubmit={(e) => e.preventDefault()}>

@@ -1,15 +1,18 @@
 import { motion } from 'motion/react';
 import { Swords } from 'lucide-react';
 import { RAID_HISTORY } from '../data';
+import { useState } from 'react';
+import MissionDebriefModal from './MissionDebriefModal';
 
 export default function RaidHistory() {
+  const [selectedRaid, setSelectedRaid] = useState<typeof RAID_HISTORY[0] | null>(null);
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+    <section id="raids" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center gap-3 mb-16">
@@ -25,7 +28,7 @@ export default function RaidHistory() {
                 <motion.div 
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: idx * 0.2, type: "spring" }}
                   className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-gaming-bg bg-red-500/20 text-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"
                 >
@@ -36,10 +39,17 @@ export default function RaidHistory() {
                 <motion.div 
                   initial={{ opacity: 0, x: idx % 2 === 0 ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: idx * 0.2 + 0.1, duration: 0.5 }}
-                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-gaming-card border border-red-500/30 hover:border-red-500/80 transition-colors shadow-lg"
+                  onClick={() => setSelectedRaid(raid)}
+                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-gaming-card border border-red-500/30 hover:border-red-500/80 hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] transition-all shadow-lg cursor-pointer transform hover:-translate-y-1 relative group/card"
                 >
+                  {raid.techStack && (
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#0a1f35]/95 backdrop-blur-md border border-gaming-cyan/50 text-gaming-cyan font-mono text-xs px-3 py-1.5 rounded shadow-[0_0_15px_rgba(34,211,238,0.3)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-20">
+                      Stack: {raid.techStack.join(' • ')}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0a1f35] border-b border-r border-gaming-cyan/50 transform rotate-45"></div>
+                    </div>
+                  )}
                   <div className="flex flex-col mb-4 bg-red-500/10 inline-block px-3 py-1 rounded text-red-400 font-mono text-xs uppercase self-start w-fit">
                     Dungeon Cleared
                   </div>
@@ -78,6 +88,9 @@ export default function RaidHistory() {
                       ))}
                     </div>
                   </div>
+                  <div className="mt-4 flex justify-end">
+                    <span className="text-xs font-mono text-gaming-cyan opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO VIEW DEBRIEF ▸</span>
+                  </div>
                 </motion.div>
 
               </div>
@@ -85,6 +98,7 @@ export default function RaidHistory() {
           </div>
         </motion.div>
       </div>
+      <MissionDebriefModal isOpen={!!selectedRaid} onClose={() => setSelectedRaid(null)} raid={selectedRaid} />
     </section>
   );
 }

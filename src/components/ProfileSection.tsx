@@ -1,15 +1,32 @@
 import { motion } from 'motion/react';
 import { User, Shield, MapPin, Star, Cpu, Crosshair } from 'lucide-react';
 import { HUNTER_INFO } from '../data';
+import { useState, useEffect } from 'react';
+import BossFightModal from './BossFightModal';
 
 export default function ProfileSection() {
+  const [isBossFightOpen, setIsBossFightOpen] = useState(false);
+  const [hasBossBadge, setHasBossBadge] = useState(false);
+
+  useEffect(() => {
+    const badge = localStorage.getItem('bossSlayerBadge');
+    if (badge === 'true') {
+      setHasBossBadge(true);
+    }
+  }, []);
+
+  const handleVictory = () => {
+    setHasBossBadge(true);
+    localStorage.setItem('bossSlayerBadge', 'true');
+  };
+
   return (
     <section id="profile" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-3 mb-8">
@@ -67,11 +84,37 @@ export default function ProfileSection() {
                     {HUNTER_INFO.objective}
                   </p>
                 </div>
+                
+                <div className="mt-8">
+                  {hasBossBadge ? (
+                    <div className="inline-flex items-center gap-3 p-3 bg-yellow-500/10 border border-yellow-500/50 rounded-lg shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+                      <div className="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                        <span className="text-yellow-400 text-xl">🏆</span>
+                      </div>
+                      <div>
+                        <div className="text-yellow-400 font-heading text-sm font-bold tracking-widest uppercase">Boss Slayer</div>
+                        <div className="text-gaming-muted font-mono text-xs">System Guardian Defeated</div>
+                      </div>
+                    </div>
+                  ) : (
+                    <button 
+                      onClick={() => setIsBossFightOpen(true)}
+                      className="px-6 py-3 bg-red-500/10 text-red-500 border border-red-500/50 rounded-lg font-heading font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_25px_rgba(239,68,68,0.6)] flex items-center gap-2 group"
+                    >
+                      <span className="group-hover:animate-pulse">⚔️ Challenge System Guardian</span>
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </motion.div>
       </div>
+      <BossFightModal 
+        isOpen={isBossFightOpen} 
+        onClose={() => setIsBossFightOpen(false)} 
+        onVictory={handleVictory} 
+      />
     </section>
   );
 }

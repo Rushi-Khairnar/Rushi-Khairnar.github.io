@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 export default function Starfield() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,10 +20,19 @@ export default function Starfield() {
       opacity: number; 
       life: number;
       color: string;
+      parallaxFactor: number;
     }[] = [];
 
     // Distinctly blue and cyan color palette
     const colors = ['#3B82F6', '#60A5FA', '#22D3EE', '#818CF8', '#E0F2FE'];
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Normalize to -1 to 1 based on center of screen
+      mouseRef.current.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseRef.current.targetY = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -41,13 +51,18 @@ export default function Starfield() {
           speed: Math.random() * 0.4 + 0.1,
           opacity: Math.random(),
           life: Math.random() * Math.PI * 2, 
-          color: colors[Math.floor(Math.random() * colors.length)]
+          color: colors[Math.floor(Math.random() * colors.length)],
+          parallaxFactor: Math.random() * 0.5 + 0.1 // Factor for parallax depth
         });
       }
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Smooth mouse interpolation
+      mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.05;
+      mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.05;
 
       stars.forEach((star) => {
         // Upward drift
@@ -56,13 +71,27 @@ export default function Starfield() {
         // Slight horizontal sway
         star.x += Math.sin(star.life) * 0.2;
 
-        // Reset if off-screen
-        if (star.y < 0) {
-          star.y = canvas.height;
-          star.x = Math.random() * canvas.width;
+        // Apply mouse parallax
+        const parallaxX = mouseRef.current.x * star.parallaxFactor * 2;
+        const parallaxY = mouseRef.current.y * star.parallaxFactor * 2;
+
+        let displayX = star.x - parallaxX;
+        let displayY = star.y - parallaxY;
+
+        // Reset if off-screen (considering parallax shift roughly)
+        if (displayY < -50) {
+          star.y = canvas.height + 50 + parallaxY;
+          star.x = Math.random() * canvas.width + parallaxX;
+        } else if (displayY > canvas.height + 50) {
+          star.y = -50 + parallaxY;
+          star.x = Math.random() * canvas.width + parallaxX;
         }
-        if (star.x > canvas.width) star.x = 0;
-        else if (star.x < 0) star.x = canvas.width;
+
+        if (displayX > canvas.width + 50) {
+          star.x = -50 + parallaxX;
+        } else if (displayX < -50) {
+          star.x = canvas.width + 50 + parallaxX;
+        }
 
         // Sparkle oscillation
         star.life += 0.02;
@@ -76,7 +105,7 @@ export default function Starfield() {
         ctx.shadowBlur = 8;
         ctx.shadowColor = star.color;
         
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.arc(displayX, displayY, star.radius, 0, Math.PI * 2);
         ctx.fill();
         
         // Reset shadow to avoid bleed
@@ -92,6 +121,7 @@ export default function Starfield() {
     draw();
 
     return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
     };
